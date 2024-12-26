@@ -192,4 +192,34 @@ Tạo nhánh hotfix từ main, sửa lỗi và hợp nhất lại vào main và 
 An:  
 -	Git hub, gitlab, nhưng github phổ biến hơn và có gói free nhíu tính năng hơn, 
 -	Còn GitHub là tên của một công ty cũng cấp dịch vụ máy chủ repository công cộng
+	Pipeline demo
+
+	-	Git hub, gitlab, nhưng github phổ biến hơn và có gói free nhíu tính năng hơn, 
+-	Còn GitHub là tên của một công ty cũng cấp dịch vụ máy chủ repository công cộng
+-	 
+ 
+
+
+
+
+
+
+
+project/ ├── index.html ├── .git/
+
+git init
+
+git checkout -b feature-1 // tạo nhánh mới và di chuyển đến nhánh mới
+	Edit index  commit trong nhánh 1 này 
+
+git checkout -b feature-2 // tạo nhánh mới và di chuyển đến nhánh mới
+	Edit index( khách nhánh feature-1)  commit trong nhánh 2 này 
+
+git checkout master // quay về b mastter
+git merge feature-1 // feature-1 với master
+git merge feature-2 // merge thêm vs feature-2
+// lỗi
+Auto-merging index.html CONFLICT (content): Merge conflict in index.html
+
+// git sẽ chỉ ra vị trí xung đột trong html và ng dùng tự sửa rồi lưu file
 
