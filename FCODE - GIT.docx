@@ -187,3 +187,9 @@ d. Hotfix
 Hotfix branches cho phép bạn xử lý các lỗi khẩn cấp trên môi trường sản xuất mà không làm gián đoạn quy trình phát triển.
 Tạo nhánh hotfix từ main, sửa lỗi và hợp nhất lại vào main và develop.
 
+
+
+An:  
+-	Git hub, gitlab, nhưng github phổ biến hơn và có gói free nhíu tính năng hơn, 
+-	Còn GitHub là tên của một công ty cũng cấp dịch vụ máy chủ repository công cộng
+
