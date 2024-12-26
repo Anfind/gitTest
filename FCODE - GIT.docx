@@ -1,0 +1,189 @@
+[URL] [https://docs.google.com/document/d/1crJ3v9F_6zaBZcXrBn75Q_a34h2cOX5FSnF3s4cpHJ0/edit?tab=t.0]
+
+
+
+Bạn hãy trình bày cơ chế hoạt động của Git, bao gồm cách hệ thống quản lý phiên bản này lưu trữ dữ liệu, xử lý xung đột và quản lý lịch sử thay đổi. Đồng thời phân tích các tính năng nổi bật của Git, cùng với những Convention phổ biến được sử dụng. Từ đó, hãy ứng dụng Git vào một dự án để qua đó hiểu thêm về vai trò của Git.
+
+ intro trong khi ông Linus Torvalds
+(1-2 phút) 
+
+
+
+
+
+
+
+# Tính năng chính
+
+1. Quản lý phiên bản, Phân tán: Theo dõi các thay đổi mã nguồn và colab, lm vc nhóm
+
+2. Staging Area, tag: 
+
+3. Tạo nhánh (branching): Phát triển các tính năng song song với nhau ( gitflow)
+
+4. Hợp nhất (merging): Kết hợp các thay đổi,
+Khôi phục (reverting): Quay lại phiên bản trước.
+
+5. Git stack : 2 vd
+
+INTRODUCTION: (Ân) 
+Why Git? 
+Background Story: Linus Torvalds
+Centralized? Weakness of the system
+Distributed System
+*Quản lý phiên bản, Phân tán: Theo dõi các thay đổi mã nguồn và colab, lm vc nhóm
+Feature: (2 per) ( 2 load)(Đ.Tiến)  (Huy Phong)
+Quản lý phiên bản phân tán( list thôi ko nói chi tiết), Collaboration, reverting
+Nhánh (Branches): nói sơ sơ và dừng lại ở gitflow (nói rõ)
+Staging Area (hash)
+merging + xử lý xung đột
+
+HOW GIT WORK:(1 per) 1,5 load (Trinh) 
+⇒ cơ chế lưu trữ dữ liệu,và quản lý lịch sử thay đổi
+
+Git stack( 1 per) ( An )
+
+
+
+
+Đây nè
+Giới thiệu chung:
+Trước Git, nhiều hệ thống kiểm soát phiên bản được vận hành theo hệ thống tập trung (centralized system).  Trong một hệ thống tập trung, tất cả dữ liệu dự án được lưu trữ trong kho lưu trữ trung tâm và các nhà phát triển "check out" hoặc "pull" mã từ nguồn duy nhất này. Mặc dù hiệu quả ở các dự án có quy mô nhỏ, nhưng hệ thống tập trung vẫn có một số hạn chế:
+Nếu máy chủ trung tâm ngừng hoạt động, tất cả người dùng đều không thể truy cập mã nguồn.
+Mọi hoạt động đều yêu cầu liên lạc với máy chủ trung tâm, điều này có thể làm chậm quá trình phát triển, đặc biệt là trong các dự án lớn.
+Người dùng cần có kết nối mạng để tương tác với nơi lưu trữ, hạn chế khả năng làm việc ngoại tuyến của họ.
+
+Ngược lại với các hệ thống tập trung, Git là hệ thống kiểm soát phiên bản phân tán (Distributed version control system). Điều này có nghĩa là mọi nhà phát triển đều có một bản sao đầy đủ của dự án, bao gồm cả lịch sử thay đổi của nó.
+
+Git được thiết kế với tính năng Version Control (Quản lý phiên bản) và Distributed Systems (Phân tích), khiến nó trở nên mạnh mẽ đặc biệt trong phát triển phần mềm hiện đại:
+
+1. Kiểm soát phiên bản: Git theo dõi mọi thay đổi được thực hiện đối với  mã nguồn, cung cấp lịch sử chi tiết cho phép nhà phát triển quay lại các phiên bản trước hoặc kiểm tra những thay đổi do người khác thực hiện. 
+   
+2. Bản chất phân tán: Trong hệ thống kiểm soát phiên bản phân tán như Git, mỗi nhà phát triển có bản sao hoàn chỉnh của riêng mình. Điều này có nghĩa là họ có thể làm việc độc lập mà không cần phụ thuộc vào máy chủ trung tâm.
+
+Feature
+
+
+Thông thường trên git thì ta sẽ có một cái nhánh chính và ta gọi nhánh đó là master hoặc là main và trên nhánh đó sẽ có rất nhiều commit khác nhau để có thể thay đổi code, nhưng mà tuy nhiên bạn không cần nhất thiết là phải làm trên một nhánh đó hoàn toàn, mà có thể tẻ ra thành những hướng đi khác nhau, và những hướng nay người ta gọi đó là nhánh
+Phân nhánh (branches): Nhánh (branch) trong Git là một cách để tách biệt các công việc, tính năng hoặc thử nghiệm khác nhau trong một dự án. Mỗi nhánh là một bản sao độc lập của kho lưu trữ mã nguồn, giúp bạn có thể làm việc song song với các phần khác nhau của dự án mà không ảnh hưởng đến nhánh chính hoặc các nhánh khác. Đây là một công cụ mạnh mẽ để quản lý các thay đổi và phát triển dự án một cách hiệu quả. Dưới đây là một số chi tiết về cách hoạt động và lợi ích của nhánh trong Git:
+Tạo nhánh mới: Khi bạn muốn bắt đầu làm việc trên một tính năng mới hoặc sửa một lỗi mà không ảnh hưởng đến mã nguồn hiện tại, bạn có thể tạo một nhánh mới.
+git branch <ten-nhanh>
+Chuyển đổi giữa các nhánh: Bạn có thể chuyển đổi qua lại giữa các nhánh để làm việc trên các phần khác nhau của dự án.
+git checkout <ten-nhanh>
+Lợi ích của việc sử dụng nhánh:
+Làm việc song song: Nhiều lập trình viên có thể làm việc trên các tính năng hoặc sửa lỗi khác nhau cùng một lúc mà không ảnh hưởng đến công việc của nhau.
+An toàn: Nếu một tính năng mới không hoạt động đúng như dự định, bạn có thể xóa nhánh đó mà không ảnh hưởng đến mã nguồn chính.
+Dễ dàng theo dõi và quản lý: Nhánh giúp bạn tổ chức công việc một cách rõ ràng và có hệ thống, dễ dàng theo dõi tiến trình của từng tính năng hoặc sửa lỗi.
+Gitflow:
+Gitflow là một mô hình quản lý nhánh trong Git được thiết kế để giúp bạn quản lý và phát triển phần mềm một cách có tổ chức và hiệu quả hơn. Nó được đề xuất bởi Vincent Driessen và nhanh chóng trở nên phổ biến trong cộng đồng phát triển phần mềm. 
+Các nhánh chính trong Gitflow
+main hoặc master: Đây là nhánh chính và luôn chứa mã nguồn sạch và ổn định nhất của dự án. Phiên bản trên nhánh này thường đại diện cho phiên bản phát hành (release) sản phẩm.
+develop: Đây là nhánh chính nơi tất cả các thay đổi mới được tích hợp. Nhánh này chứa mã nguồn ở trạng thái sẵn sàng cho giai đoạn kiểm thử, nhưng chưa phải là phiên bản cuối cùng.
+Các loại nhánh phụ
+ Feature branches (Nhánh tính năng):
+Mục đích: Dùng để phát triển các tính năng mới hoặc cải tiến.
+Release branches (Nhánh phát hành):
+Mục đích: Chuẩn bị cho phiên bản phát hành, sửa các lỗi nhỏ, và thực hiện công việc chuẩn bị cuối cùng trước khi phát hành.
+Hotfix branches (Nhánh sửa lỗi nhanh):
+Mục đích: Sửa các lỗi nghiêm trọng trong phiên bản sản phẩm hiện tại.
+
+
+
+
+Lợi ích của Gitflow:
+Tổ chức tốt hơn: Giúp bạn quản lý dự án một cách có tổ chức, với các quy tắc rõ ràng về cách làm việc với các nhánh.
+Dễ bảo trì: Mỗi loại nhánh có một mục đích cụ thể, giúp bạn dễ dàng theo dõi và quản lý các thay đổi.
+Hỗ trợ phát hành linh hoạt: Nhánh release và hotfix giúp bạn dễ dàng quản lý các phiên bản và phản ứng nhanh với lỗi nghiêm trọng.
+
+Reverting
+Hoàn tác thay đổi, hay còn gọi là reverting, là một thao tác quan trọng trong Git giúp bạn hoàn lại các thay đổi đã được commit trước đó. Đây là cách để bạn đưa trạng thái của dự án về một điểm cụ thể trong quá khứ mà không làm mất lịch sử commit.
+Khi bạn revert một commit, Git sẽ tạo ra một commit mới có nội dung ngược lại với commit mà bạn muốn hoàn tác. Điều này giữ cho lịch sử của dự án được bảo toàn mà vẫn loại bỏ được những thay đổi không mong muốn. Ví dụ: nếu commit trước đó đã thêm một dòng code, thì commit revert sẽ xóa dòng code đó.
+Lợi ích của Reverting:
+Giữ nguyên lịch sử commit: Khác với git reset, revert không xóa bỏ các commit cũ mà giữ nguyên lịch sử commit, giúp theo dõi các thay đổi một cách chi tiết.
+An toàn hơn khi làm việc theo nhóm: Vì không làm mất lịch sử commit, revert là cách an toàn hơn khi bạn làm việc theo nhóm, giúp tránh xung đột và mất mát dữ liệu.
+
+
+
+
+
+Staging Area
+Có 2 khu vực chính để quản lý dữ liệu là thư mục làm việc và kho lưu trữ, với thư mục làm việc là nơi bạn viết code và kho lưu trữ là nơi bạn post code lên, thế nhưng git cung cấp cho người dùng khu vực thứ 3 đó là staging area. Trước tạo một snapshot, các tệp liên quan phải được đi qua staging area, đây là khu vực trung gian giúp người dùng xử lý các tệp liên quan đến snapshot sắp được tạo. Bởi vì  không phải mọi tệp được sửa đổi trong thư mục làm việc của người dùng đều được đưa vào snapshot như một phần của dự án mà người dùng phải chọn ra những tệp có thay đổi mà họ muốn để đưa vào snapshot. Việc này giúp bạn chọn ra sự thay đổi mà bạn muốn cho mỗi commit thông qua snapshot, từ đó xác định rõ những thay đổi cụ thể nào đã được thực hiện trong từng commit cũng như quản lý nội dung và sửa chữa các commit dễ dàng hơn. Bằng việc chỉ cho phép bạn commit những thay đổi được chọn từ tệp đã được theo dõi và thông báo lại cho bạn các thay đổi nào không được thêm vào, staging area giúp bạn tránh việc commit nhầm các tệp chưa được kiểm tra hoặc chưa hoàn thiện hoặc bỏ qua các tệp chưa được theo dõi (tệp mới) khi thực hiện commit, tránh mất mát dữ liệu. 
+
+
+
+Thẻ (tag) là một tham chiếu cố định trỏ đến một commit cụ thể trong lịch sử kho lưu trữ. Thẻ thường được sử dụng để đánh dấu các điểm quan trọng như bản phát hành hoặc các cột mốc trong quá trình phát triển, giúp người dùng truy cập lại vào các commit cũ một cách dễ dàng, nhanh chóng . Không giống như nhánh (branch), thẻ không thể thay đổi hoặc ghi nhận các lịch sử commit mới sau khi được tạo. Điều này giúp đảm bảo rằng thẻ luôn giữ nguyên trạng thái tại thời điểm được tạo, không bị ảnh hưởng bởi bất kỳ thay đổi nào xảy ra sau đó. Nó rất hiệu quả trong việc quản lý các phiên bản cũng như các mốc quan trọng của dự án (nói chung là giống bookmark á :v).
+
+
+Hash là một chuỗi gồm 40 ký tự khác nhau (e4d909c290d0fb1ca068ffaddf22cbd0) đóng vai trò là một mã định danh cho nhiều đối tượng trong kho lưu trữ như commit, blob ( nội dung tệp), trees(nội dung thư mục) và tag. Như tên gọi của mình, hash được tạo ra bằng cách sử dụng một hàm băm mật mã (cụ thể là SHA-1), và vì được tạo ra bằng cách băm nhỏ đối tượng nên Git hashes sẽ có những tính năng và đặc điểm sau:
+-Với các đối tượng (như commit, tệp, thư mục) có chứa một phần thông tin giống nhau thì một phần mã hash của chúng sẽ giống nhau. Việc này giúp bạn theo dõi và quản lý hiệu quả hơn.
+-Git hashes rất quan trọng trong việc bảo toàn tính toàn vẹn của code, nếu có sự thay đổi nhỏ nhất trong một byte của kho lưu trữ, mã hash sẽ lập tức bị thay đổi, điều này giúp cảnh báo bạn về sự thay đổi.
+-Mỗi commit đều có mã riêng nên sẽ dễ dàng hơn cho nhà phát triển theo dõi sự thay đổi, quay trở lại các trạng thái trước và hiểu rõ về lịch sử dự án dễ dàng hơn.
+-Khi thực hiện lệnh commit, git sẽ so sánh tìm ra sự khác nhau giữa 2 branch mà bạn sử dụng bằng cách so sánh mã hash của chúng.
+Vì vậy ta có thể hiểu quá trình khi cập nhật 1 commit vào kho lưu trữ như sau:
+-Đầu tiên thêm tệp chứa thay đổi bạn muốn vào staging area.
+-Sau đó git sẽ tạo ra một commit chứa sự thay đổi đó, và mã hash sẽ được tạo ra sau khi tạo commit bằng cách “băm” nội dung commit.
+-Cuối cùng commit sau khi đã có mã hash sẽ được cho vào cho lưu trữ.
+
+
+Merging + xử lý xung đột:
+Merge là một hoạt động cơ bản tích hợp các thay đổi từ nhánh này sang nhánh khác, Nó cho phép các nhà phát triển kết hợp các dòng phát triển khác nhau, đảm bảo rằng tất cả các đóng góp đều được tích hợp vào một cơ sở mã thống nhất. Khi bạn thực hiện hợp nhất, Git hoạt động với các nhánh làm đối tượng chính của nó. Vì vậy, sau khi lập trình viên chỉnh sửa và thay đổi nhánh của riêng mình theo ý tưởng của mình và họ muốn kết hợp nó với một nhánh khác hoặc với nhánh chính, họ sẽ sử dụng lệnh merge. Khi thực hiện lệnh merge, git sẽ tìm điểm chung gần nhất của 2 nhánh, sau đó gộp các thay đổi từ nhánh cần hợp nhất vào nhánh hiện tại. Trong quá trình này nếu không xảy ra xung đột, git sẽ tự động thực hiện hợp nhất, nhưng khi xảy ra xung đột, git sẽ ngưng lại quá trình tích hợp và thông báo cho chúng ta loại xung đột đang xảy ra bằng cách đánh dấu các vùng xung đột trong tệp và yêu cầu ltv giải quyết xung đột thủ công. Để hỗ trợ giải quyết xung đột, Git cung cấp các lệnh và các công cụ tích hợp như VSCode, Sublime Merge, … với giao diện trực quan và dễ dàng thao tác với người dùng. Sau khi giải quyết xung đột, các tệp được thêm lại vào staging area và được hợp nhất hoàn thiện bằng cách tạo một commit mới. Với tính năng nổi bật của mình, merge giúp cho việc thao tác sửa đổi và tạo thêm các tính năng mới cho dự án trở nên linh hoạt hiệu quả hơn bằng cách cho phép các ltv thao tác trên dự án như sửa lỗi và tạo các tính năng mới song song với nhau mà không gây ảnh hưởng đến lịch sử dự án.
+        
+
+
+Để giảm thiểu nguy cơ xảy ra xung đột, trước khi tiến hành merge, người dùng nên lấy commit mới nhất của nhánh mà bạn muốn hợp nhất từ kho lưu trữ về thư mục làm việc của bạn. Vì trong dự án, có rất nhiều thành viên cùng làm việc và sẽ có những commit mới được thêm vào nhánh mà bạn muốn hợp nhất vào, vì thế nó sẽ có sự thay đổi so với lúc bạn bắt đầu. Việc lấy commit mới nhất giúp bạn có được bản cập nhật mới nhất của nhánh, bằng cách này bạn có thể xác định và giải quyết xung đột sớm hơn trong quá trình, giúp tránh xung đột bất ngờ trong quá trình hợp nhất. Ngoài ra, không chỉ lấy về commit mới nhất của nhánh mà bạn muốn làm việc, bạn cũng nên lấy về commit mới nhất của nhánh mà bạn làm việc trước khi bạn đẩy bản hợp nhất của bạn lên nhánh đó. Điều này đảm bảo rằng không có commit mới nào được thêm vào nhánh đó và tránh việc xử lý xung đột không cần thiết .Lưu ý rằng, việc thực hiện hợp nhất giữa các nhánh chưa được hoàn thành hay chưa được kiểm tra kỹ lưỡng có thể gây ra sự bất ổn định trong lịch sử dự án của bạn. 
+
+III.	HOW GIT WORK:(1 per) 1,5 load (Trinh) 	
+ Cơ chế lưu trữ dữ liệu,và quản lý lịch sử thay đổi
+
+Git hoạt động như một hệ thống quản lý phiên bản phân tán, lưu trữ toàn bộ lịch sử thay đổi của dự án trên một cơ sở dữ liệu chuyên biệt gọi là repository. Điểm đặc biệt của Git là nó không chỉ theo dõi từng file thay đổi mà còn lưu trữ toàn bộ trạng thái của dự án dưới dạng các snapshot.
+a. Lưu trữ dữ liệu dưới dạng snapshot
+Mỗi khi bạn commit, Git sẽ lưu trạng thái hiện tại của dự án dưới dạng một snapshot. Nếu file nào không thay đổi so với snapshot trước, Git chỉ tạo liên kết tới file đã tồn tại thay vì sao chép toàn bộ dữ liệu.
+Điều này giúp Git hoạt động hiệu quả hơn về mặt lưu trữ và hiệu suất.
+b. Cấu trúc dữ liệu của Git
+Git sử dụng cơ chế lưu trữ dữ liệu dựa trên ba loại đối tượng chính:
+Blob: Lưu trữ nội dung của từng file.
+Tree: Lưu cấu trúc thư mục, chứa các blob và cây con.
+Commit: Ghi lại snapshot, bao gồm metadata (tác giả, thời gian) và liên kết tới các cây thư mục (tree).
+Tag: Đánh dấu một commit cụ thể, thường được sử dụng để tạo các bản phát hành (release).
+c. Xử lý xung đột
+Git tự động hợp nhất các thay đổi từ nhiều branch khi có thể. Nếu có xung đột (conflict), Git yêu cầu người dùng giải quyết thủ công bằng cách chỉnh sửa file bị xung đột và tạo commit mới.
+d. Lưu trữ lịch sử thay đổi
+Git ghi lại mọi thay đổi với các commit, cho phép người dùng kiểm tra lại trạng thái cũ bằng các lệnh như git log, git diff, hoặc git checkout.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PHẦN NÀY LÀ NOTE LINH TINH
+
+
+a. Develop branch
+
+Trong hệ thống quản lý mã nguồn Git, thay vì sử dụng một nhánh chính duy nhất, có thể sử dụng hai nhánh để quản lý lịch sử dự án:
+Nhánh main: Chứa lịch sử các bản phát hành chính thức (production).	
+Nhánh develop: Chứa các thay đổi tích hợp và tính năng mới trước khi chính thức phát hành. Đây là nhánh chính để phát triển.
+b. Feature branch
+
+Mỗi tính năng (feature) mới nên được phát triển trên một nhánh riêng biệt (feature branch), nhánh này có thể được đẩy lên kho lưu trữ trung tâm để sao lưu hoặc hợp tác. Điều quan trọng là các nhánh tính năng không nên trực tiếp branch từ main, mà thay vào đó từ nhánh develop. Khi tính năng hoàn thành, nhánh tính năng sẽ được hợp nhất lại với develop.
+c. Release branch
+
+Tạo nhánh release từ develop khi sẵn sàng cho phát hành.
+Không thêm tính năng mới, chỉ sửa lỗi và chuẩn bị phát hành.
+Khi phát hành hoàn tất, hợp nhất nhánh release vào main và develop.
+Sử dụng git-flow giúp tự động hóa quy trình tạo và hoàn tất nhánh release.
+d. Hotfix
+Hotfix branches cho phép bạn xử lý các lỗi khẩn cấp trên môi trường sản xuất mà không làm gián đoạn quy trình phát triển.
+Tạo nhánh hotfix từ main, sửa lỗi và hợp nhất lại vào main và develop.
+
